@@ -1,12 +1,13 @@
 import React from 'react'
-import Header from './Components/Header'
-import Hero_section from './Components/Hero_section'
+import Header from './Components/Head/Header.jsx'
+import MovieSlider from './Components/Slider/MovieSlider'
 
 function App() {
   return (
-    <div className='w-full h-screen'>
+    <div className='bg-[#0B0B0B] w-full h-full'>
       <Header/>
-      <Hero_section/>
+      <MovieSlider/>
+      
     </div>
   )
 }
