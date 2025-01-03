@@ -1,10 +1,10 @@
 import React from "react";
-import logo from "../assets/Popcorn_Hub_Logo.png";
+import logo from "../Head/Popcorn_Hub_Logo.png"
 
 function Header() {
   return (
     <header>
-      <div className="w-full h-[5rem] flex bg-black justify-between shadow-xl shadow-zinc-900 items-center px-6">
+      <div className="w-full h-[5rem] flex fixed z-[5] bg-black justify-between shadow-xl shadow-zinc-900 items-center px-6">
         <div className="w-[13rem] h-[5rem]">
           <img className="w-full h-full" src={logo} alt="" />
         </div>
@@ -32,10 +32,10 @@ function Header() {
               type="text"
               placeholder="Search..."
             />
-            <i class="fa-solid fa-magnifying-glass text-[1.3rem]"></i>
+            <i className="fa-solid fa-magnifying-glass text-[1.3rem]"></i>
           </div>
           <button className="px-3 text-white bg-[#E50914] hover:bg-red-700 rounded-lg">
-            <i class="fa-solid fa-user text-white"></i> Sign In
+            <i className="fa-solid fa-user text-white"></i> Sign In
           </button>
         </div>
       </div>

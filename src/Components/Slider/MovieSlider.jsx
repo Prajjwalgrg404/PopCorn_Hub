@@ -8,7 +8,7 @@ const MovieSlider = () => {
     const imageList = Object.values(images).map((img) => img.default)
     
     return (
-        <div className="swiper-container  ">
+        <div className="swiper-container py-20">
           <Swiper
             spaceBetween={40} 
             slidesPerView={1} 
