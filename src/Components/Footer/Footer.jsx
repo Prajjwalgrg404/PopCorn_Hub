@@ -96,7 +96,7 @@ function Footer() {
           </div>
         </div>
         <div className=" text-center text-[#686B68] text-sm py-3 border-t-2 border-[#686B68] ">
-          © 2024 PopCornHub. All rights reserved.
+          © 2025 PopCornHub. All rights reserved.
         </div>
       </footer>
     </>
