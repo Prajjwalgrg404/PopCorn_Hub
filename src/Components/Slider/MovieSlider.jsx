@@ -1,35 +1,60 @@
-import React from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import { Autoplay } from 'swiper/modules';
+import React, { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
-const images = import.meta.glob('/src/assets/images/*.{jpg,jpeg,webp,png,gif}', { eager: true });
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import axios from "../axois/axois";
+
 const MovieSlider = () => {
-    const imageList = Object.values(images).map((img) => img.default)
-    
-    return (
-        <div className="swiper-container py-20">
-          <Swiper
-            spaceBetween={40} 
-            slidesPerView={1} 
-            grabCursor={false}
-            modules={[Autoplay]}
-            navigation 
-            pagination={{ clickable: true }} 
-            loop={true} 
-            autoplay={{
-              delay: 3000, 
-              disableOnInteraction:false,
-            }}
-          >
-            {imageList.map((image, index) => (
-              <SwiperSlide key={index}>
-                <img src={image} alt={`Slide ${index + 1}`} className="w-full max-w-screen h-screen scroll-mt-0.5 opacity-50 object-fill" />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      );
-}
+  const [wallpaper, setwallpaper] = useState([]);
 
-export default MovieSlider
+  console.log(wallpaper);
+
+  const GetWallpaper = async () => {
+    try {
+      const { data } = await axios.get(`/trending/all/day`);
+      // console.log(data.results);
+      setwallpaper(data.results);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  useEffect(() => {
+    GetWallpaper();
+  }, []);
+
+    const settings = {
+      infinite: true, // Loop through slides
+      speed: 500, // Transition speed in ms
+      slidesToShow: 1, // Number of slides visible
+      slidesToScroll: 1, // Number of slides scrolled at a time
+      autoplay: true, // Auto-slide functionality
+      autoplaySpeed: 3000, // Time between slides (ms)
+    };
+
+  return (
+    <div className="slider-container py-[5rem] w-full h-screen overflow-y-hidden flex  text-white">
+      {/* <Slider {...settings}> */}
+      {wallpaper.map((image, index) => (
+          <div
+            key={index}
+            style={{
+              background: `url(https://image.tmdb.org/t/p/original/${
+                image.backdrop_path || image.profile_path
+              })`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+            className="min-w-full h-[90vh]"
+          ></div>
+        ))
+      }
+      {/* </Slider> */}
+    </div>
+  );
+};
+
+export default MovieSlider;
