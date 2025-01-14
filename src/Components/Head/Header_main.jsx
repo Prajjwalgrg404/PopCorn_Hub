@@ -11,17 +11,12 @@ function Header_main() {
         <h3 className="px-4 py-[1.64rem] border-b-2 border-transparent hover:border-b-[3px] hover:border-white hover:text-white">
           Home
         </h3>
-        <h3 className="px-4 py-[1.64rem] border-b-2 border-transparent hover:border-b-[3px] hover:border-white hover:text-white">
-          Genre
-        </h3>
+
         <h3 className="px-4 py-[1.64rem] border-b-2 border-transparent hover:border-b-[3px] hover:border-white hover:text-white">
           Movies
         </h3>
         <h3 className="px-4 py-[1.64rem] border-b-2 border-transparent hover:border-b-[3px] hover:border-white hover:text-white">
           Tv shows
-        </h3>
-        <h3 className="px-4 py-[1.64rem] border-b-2 border-transparent hover:border-b-[3px] hover:border-white hover:text-white">
-          Top IMDB
         </h3>
       </div>
     </>

@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "../axois/axois";
 
 const MovieSlider = () => {
-  const [wallpaper, setwallpaper] = useState([]);
-
+  const [wallpaper, setWallpaper] = useState([]);
   console.log(wallpaper);
 
   const GetWallpaper = async () => {
     try {
       const { data } = await axios.get(`/trending/all/day`);
-      // console.log(data.results);
-      setwallpaper(data.results);
+      setWallpaper(data.results);
     } catch (error) {
       console.log("error", error);
     }
@@ -26,33 +21,82 @@ const MovieSlider = () => {
     GetWallpaper();
   }, []);
 
-    const settings = {
-      infinite: true, // Loop through slides
-      speed: 500, // Transition speed in ms
-      slidesToShow: 1, // Number of slides visible
-      slidesToScroll: 1, // Number of slides scrolled at a time
-      autoplay: true, // Auto-slide functionality
-      autoplaySpeed: 3000, // Time between slides (ms)
-    };
+  const sliderSettings = {
+    infinite: true, // Infinite loop scrolling
+    speed: 500, // Transition speed in ms
+    slidesToShow: 1, // Number of slides to show
+    slidesToScroll: 1, // Number of slides to scroll
+    autoplay: true, // Enable autoplay
+    autoplaySpeed: 3000, // Autoplay speed in ms
+    pauseOnHover: false,
+  };
 
   return (
-    <div className="slider-container py-[5rem] w-full h-screen overflow-y-hidden flex  text-white">
-      {/* <Slider {...settings}> */}
-      {wallpaper.map((image, index) => (
-          <div
-            key={index}
-            style={{
-              background: `url(https://image.tmdb.org/t/p/original/${
-                image.backdrop_path || image.profile_path
-              })`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-            className="min-w-full h-[90vh]"
-          ></div>
-        ))
-      }
-      {/* </Slider> */}
+    <div className="slider-container py-[5rem] w-full h-screen overflow-hidden text-white">
+      {wallpaper.length > 0 ? (
+        <Slider {...sliderSettings}>
+          {wallpaper.map((image, index) => (
+            <div key={index}>
+              <div
+                style={{
+                  background: `url(https://image.tmdb.org/t/p/original/${
+                    image.backdrop_path || image.profile_path
+                  }) no-repeat center center / cover`,
+                }}
+                className="w-[78vw] h-screen ml-[20.5rem]"
+              ></div>
+
+              {/* div for details */}
+
+              <div className="w-[28vw] h-screen flex flex-col items-center gap-3 justify-center bg-black fixed ml-3 top-0 shadow-[60px_-35px_50px_rgba(0,0,0,1)] px-4 ">
+                {/* Name of the movie or tv shows */}
+                <h1 className="text-[2rem] font-semibold mb-5">
+                  {image.name ||
+                    image.title ||
+                    image.original_name ||
+                    image.original_title}
+                </h1>
+                {/* description and all things related to the movie or tv shows */}
+                <div className="flex items-center gap-5 mb-8">
+                  <h5 className="text-sm text-[#737373] uppercase">
+                    {image.media_type}
+                  </h5>
+                  <span className="text-white">•</span>
+
+                  <h5 className="text-sm text-[#737373]">
+                    {image.origin_country || "N/A"}
+                  </h5>
+                  <span className="text-white">•</span>
+
+                  <h5 className="text-sm text-[#737373]">
+                    {image.first_air_date || image.release_date || "N/A"}
+                  </h5>
+                </div>
+                <h4 className="text-sm text-[#737373]">
+                  Rating: <i className="fa-solid fa-star text-xs"></i>{" "}
+                  {image.vote_average}
+                </h4>
+                <h4 className="text-sm text-[#737373] mb-8">
+                  {image.overview || "No description available"}
+                  ...
+                </h4>
+
+                {/* Watch Now button */}
+
+                <div className="px-10 py-4 mb-[6rem] rounded-3xl bg-[#252629] hover:bg-white hover:text-black">
+                  <button>
+                    <i className="fa-solid fa-play text-center text-xs mr-1"></i>{" "}
+                    WATCH NOW
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </Slider>
+      ) : (
+        <p>Loading...</p> 
+        // yaha pur bhi loader lagana hai
+      )}
     </div>
   );
 };
