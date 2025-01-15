@@ -29,7 +29,7 @@ function NowPlaying_section() {
       <button
         type="button"
         onClick={onClick}
-        className="absolute top-[8.5rem] left-0 transform -translate-y-1/2 bg-black opacity-60 hover:opacity-80 text-white w-12 h-full flex items-center justify-center z-10"
+        className="absolute top-[8.5rem] left-[-3.5rem] transform -translate-y-1/2 bg-black hover:bg-[#5F6368] text-white w-12 h-full flex items-center justify-center z-10"
       >
         <i className="fa-solid fa-angles-left text-3xl "></i>
       </button>
@@ -41,7 +41,7 @@ function NowPlaying_section() {
       <button
         type="button"
         onClick={onClick}
-        className="absolute top-[8.5rem] right-0 transform -translate-y-1/2 bg-black opacity-60 hover:opacity-80 text-white w-12 h-full flex items-center justify-center  z-10"
+        className="absolute top-[8.5rem] right-[-3.5rem] transform -translate-y-1/2 bg-black  hover:bg-[#5F6368] text-white w-12 h-full flex items-center justify-center  z-10"
       >
         <i className="fa-solid fa-angles-right text-3xl"></i>
       </button>
@@ -62,17 +62,17 @@ function NowPlaying_section() {
   
 
   return (
-    <div className="slider-container w-full h-[65vh] relative px-4">
+    <div className="slider-container w-full h-[65vh] relative px-14 ">  
       <h1 className="text-2xl py-6 px-5 text-white">Now Playing</h1>
         <Slider {...settings}>
           {images.map((image, id) => {
             return (
               <div
                 key={id}
-                className="cards min-w-[15%] h-[17rem] rounded-md relative"
+                className="cards min-w-[15%] h-[17rem] rounded-md relative "
               >
                 {/* Backdrop */}
-                <div className="absolute duration-300 flex items-center justify-center inset-0 opacity-0 hover:opacity-100 hover:bg-[rgba(0,0,0,0.6)] rounded-md ">
+                <div className="absolute duration-300 flex items-center justify-center inset-0 opacity-0 hover:opacity-100 hover:bg-[rgba(0,0,0,0.6)]">
                   <img
                     className="w-10 h-10"
                     src={Play_button}
@@ -81,7 +81,7 @@ function NowPlaying_section() {
                 </div>
                 {/* Main Image */}
                 <img
-                  className="w-full h-full object-cover object-center rounded-md"
+                  className="w-full h-full object-cover object-center"
                   src={
                     image.backdrop_path || image.profile_path
                       ? `https://image.tmdb.org/t/p/original/${
