@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import image from "../../assets//images/noimage.png";
 import axios from "../axois/axois";
 import { useState } from "react";

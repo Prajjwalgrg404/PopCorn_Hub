@@ -6,12 +6,13 @@ import axios from "../axois/axois";
 
 const MovieSlider = () => {
   const [wallpaper, setWallpaper] = useState([]);
-  console.log(wallpaper);
+  // console.log(wallpaper);
 
   const GetWallpaper = async () => {
     try {
-      const { data } = await axios.get(`/trending/all/day`);
+      const { data } = await axios.get("/trending/all/day");
       setWallpaper(data.results);
+      // console.log(data.results)
     } catch (error) {
       console.log("error", error);
     }
@@ -26,8 +27,8 @@ const MovieSlider = () => {
     speed: 500, // Transition speed in ms
     slidesToShow: 1, // Number of slides to show
     slidesToScroll: 1, // Number of slides to scroll
-    autoplay: true, // Enable autoplay
-    autoplaySpeed: 3000, // Autoplay speed in ms
+    // autoplay: true, // Enable autoplay
+    autoplaySpeed: 3500, // Autoplay speed in ms
     pauseOnHover: false,
   };
 
@@ -59,7 +60,7 @@ const MovieSlider = () => {
                 {/* description and all things related to the movie or tv shows */}
                 <div className="flex items-center gap-5 mb-8">
                   <h5 className="text-sm text-[#737373] uppercase">
-                    {image.media_type}
+                  <i className="fa-solid fa-play"></i> {image.media_type}
                   </h5>
                   <span className="text-white">•</span>
 
@@ -69,7 +70,7 @@ const MovieSlider = () => {
                   <span className="text-white">•</span>
 
                   <h5 className="text-sm text-[#737373]">
-                    {image.first_air_date || image.release_date || "N/A"}
+                  <i className="fa-solid fa-calendar"></i> {image.first_air_date || image.release_date || "N/A"}
                   </h5>
                 </div>
                 <h4 className="text-sm text-[#737373]">
