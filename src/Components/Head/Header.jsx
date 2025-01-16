@@ -4,11 +4,14 @@ import image from "../../assets//images/noimage.png";
 import axios from "../axois/axois";
 import { useState } from "react";
 import Header_main from "./Header_main";
+import {Vortex} from "react-loader-spinner";
 
 function Header() {
   const [inputval, setinputval] = useState("");
   const [movieList, setmovieList] = useState([]);
   const [loading, setloading] = useState(false);
+  const [loader, setLoader]= useState(false);
+
 
   const input_Toggle = () => {
     setloading(!loading);
@@ -16,12 +19,16 @@ function Header() {
   // console.log(loading)
 
   const Getsearches = async () => {
+    setLoader(true);
     try {
       const { data } = await axios.get(`/search/multi?query=${inputval}`);
       // console.log(data);
       setmovieList(data.results);
     } catch (error) {
-      console.log("error", error);
+      console.error("error", error);
+    }
+    finally{
+      setLoader(false);
     }
   };
 
@@ -61,7 +68,18 @@ function Header() {
         } right-10 z-10`}
       >
         <div className="w-full h-full">
-          {/* if no movie is found then loader will appear and we have to Implement loader here!!! */}
+          {/* if no movie is found then loader will appear and we have to Implement loader here!!! */} 
+          {loader && (
+            <div className="flex items-center justify-center mt-48">
+           <Vortex
+               visible={true}
+               height="100"
+               width="100"
+               ariaLabel="vortex-loading"
+               colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']}
+            /> 
+              </div>
+            )}
 
           {movieList.map((items, id) => {
             return (
