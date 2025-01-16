@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import axios from "../axois/axois";
+import axios from "../../Components/axois/axois";
 
 const MovieSlider = () => {
   const [wallpaper, setWallpaper] = useState([]);
@@ -10,7 +10,7 @@ const MovieSlider = () => {
 
   const GetWallpaper = async () => {
     try {
-      const { data } = await axios.get("/trending/all/day");
+      const { data } = await axios.get("/trending/all/week");
       setWallpaper(data.results);
       // console.log(data.results)
     } catch (error) {
@@ -27,7 +27,7 @@ const MovieSlider = () => {
     speed: 500, // Transition speed in ms
     slidesToShow: 1, // Number of slides to show
     slidesToScroll: 1, // Number of slides to scroll
-    // autoplay: true, // Enable autoplay
+    autoplay: true, // Enable autoplay
     autoplaySpeed: 3500, // Autoplay speed in ms
     pauseOnHover: false,
   };
@@ -44,7 +44,7 @@ const MovieSlider = () => {
                     image.backdrop_path || image.profile_path
                   }) no-repeat center center / cover`,
                 }}
-                className="w-[78vw] h-screen ml-[20.5rem]"
+                className="w-[79vw] h-screen ml-[19.2rem]"
               ></div>
 
               {/* div for details */}
@@ -60,7 +60,7 @@ const MovieSlider = () => {
                 {/* description and all things related to the movie or tv shows */}
                 <div className="flex items-center gap-5 mb-8">
                   <h5 className="text-sm text-[#737373] uppercase">
-                  <i className="fa-solid fa-play"></i> {image.media_type}
+                    <i className="fa-solid fa-play"></i> {image.media_type}
                   </h5>
                   <span className="text-white">•</span>
 
@@ -70,7 +70,8 @@ const MovieSlider = () => {
                   <span className="text-white">•</span>
 
                   <h5 className="text-sm text-[#737373]">
-                  <i className="fa-solid fa-calendar"></i> {image.first_air_date || image.release_date || "N/A"}
+                    <i className="fa-solid fa-calendar"></i>{" "}
+                    {image.first_air_date || image.release_date || "N/A"}
                   </h5>
                 </div>
                 <h4 className="text-sm text-[#737373]">
@@ -95,7 +96,7 @@ const MovieSlider = () => {
           ))}
         </Slider>
       ) : (
-        <p>Loading...</p> 
+        <p>Loading...</p>
         // yaha pur bhi loader lagana hai
       )}
     </div>

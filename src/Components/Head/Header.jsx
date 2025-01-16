@@ -30,7 +30,7 @@ function Header() {
 
   return (
     <header>
-      <div className="w-full h-[5rem] flex fixed z-[5] bg-black justify-between shadow-lg shadow-gray-950 items-center px-6">
+      <div className="w-full h-[5rem] flex fixed z-[5] bg-black justify-between shadow-md shadow-gray-950 items-center px-6">
         <Header_main />
         <div className="flex gap-3">
           <div className="w-[11rem] px-2 border rounded-md flex items-center bg-white">

@@ -8,6 +8,10 @@
   box-sizing: border-box;
   font-family: "Roboto"
 }
+.slick-track {
+  display: flex !important;
+  gap: 10px; /* Adjust as needed */
+}
 
 ::-webkit-scrollbar {
   width: 5px;
