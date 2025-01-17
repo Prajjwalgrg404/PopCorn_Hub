@@ -1,42 +1,39 @@
 import axios from "../Components/axois/axois";
-import React, { useEffect, useState } from "react";
-
-import { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import { Bars } from "react-loader-spinner";
-const Movies_card = lazy(() => import("./Movies_card"));
+const Tv_cards = lazy(() => import("./Tv_cards"));
 
-function Movies() {
-  const [movies, setmovies] = useState([]);
-  const [category, setcategory] = useState("popular");
-  // console.log(category)
+function Tv_shows() {
+  const [tvshows, settvshows] = useState([]);
+  const [tvcategory, settvcategory] = useState("popular");
+  console.log(tvshows);
 
-  const Popularmovies = async () => {
+  const AlltvShows = async () => {
     try {
-      const { data } = await axios.get(`/movie/${category}`);
-      setmovies(data.results);
+      const { data } = await axios.get(`/tv/${tvcategory}`);
+      settvshows(data.results);
     } catch (error) {
       console.log("Error fetching data:", error);
     }
   };
 
   useEffect(() => {
-    Popularmovies();
-  }, [category]);
+    AlltvShows();
+  }, [tvcategory]);
 
   return (
     <div className=" w-full h-screen text-white py-[5rem] overflow-y-scroll scroll-smooth">
       <div className="flex items-center justify-between text-white px-14 py-6">
-        <h1 className="text-[1.5rem] uppercase text-white">{category}</h1>
+        <h1 className="text-[1.5rem] uppercase text-white">{tvcategory}</h1>
         {/* dropdown menu  */}
-
         <select
-          onClick={(e) => setcategory(e.target.value)}
-          className="w-[10rem] py-2 px-2 rounded-lg outline-none bg-[#202020]"
+          onClick={(e) => settvcategory(e.target.value)}
+          className="w-[10rem] py-2 px-2 rounded-lg outline-none bg-[#202020] "
           name="cars"
           id="cars"
         >
           <option value="popular">Popular</option>
-          <option value="upcoming">Upcoming</option>
+          <option value="airing_today">Airing Today</option>
           <option value="top_rated">Top Rated</option>
         </select>
       </div>
@@ -57,11 +54,11 @@ function Movies() {
             </div>
           }
         >
-          <Movies_card movies={movies} />
+          <Tv_cards tvshows={tvshows} />
         </Suspense>
       </div>
     </div>
   );
 }
 
-export default Movies;
+export default Tv_shows;

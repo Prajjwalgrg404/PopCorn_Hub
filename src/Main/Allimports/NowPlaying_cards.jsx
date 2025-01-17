@@ -57,7 +57,7 @@ function NowPlaying_cards({ images }) {
             </div>
             {/* Main Image */}
             <img
-              className="w-full h-[60%] object-contain object-center rounded-md"
+              className="w-full h-[65%] object-contain object-center rounded-md"
               src={
                 image.backdrop_path || image.profile_path
                   ? `https://image.tmdb.org/t/p/original/${
@@ -69,12 +69,12 @@ function NowPlaying_cards({ images }) {
             />
             <div className="px-2 py-1">
               <h2 className="text-lg text-white font-semibold overflow-auto">
-                {image.name ||
+                {(image.name ||
                   image.title ||
                   image.original_name ||
-                  image.original_title}
+                  image.original_title).slice(0,27)}
               </h2>
-              <p className="text-sm text-[#737373] mb-2">
+              <p className="text-sm text-[#737373] py-2">
                 {image.overview.slice(0, 60) || "No description available"}
                 ...
               </p>

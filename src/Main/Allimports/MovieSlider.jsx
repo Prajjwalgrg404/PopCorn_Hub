@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "../../Components/axois/axois";
+import { Bars } from "react-loader-spinner";
 
 const MovieSlider = () => {
   const [wallpaper, setWallpaper] = useState([]);
@@ -96,8 +97,17 @@ const MovieSlider = () => {
           ))}
         </Slider>
       ) : (
-        <p>Loading...</p>
-        // yaha pur bhi loader lagana hai
+        <div className="w-full h-screen flex items-center justify-center">
+          <Bars
+            height="80"
+            width="80"
+            color="#737373"
+            ariaLabel="bars-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </div>
       )}
     </div>
   );
